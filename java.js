@@ -7,7 +7,6 @@ const productos = [
 
 let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
 
-// ----- FUNCIONES -----
 function mostrarProductos() {
   const contenedor = document.getElementById("productos-container");
   contenedor.innerHTML = "";
@@ -51,7 +50,7 @@ function actualizarCarrito() {
 
   totalTexto.textContent = `Total: $${total}`;
 
-  // Guardar en localStorage
+ 
   localStorage.setItem("carrito", JSON.stringify(carrito));
 }
 
@@ -61,12 +60,12 @@ function vaciarCarrito() {
   actualizarCarrito();
 }
 function eliminarDelCarrito(indice) {
-  carrito.splice(indice, 1); // elimina 1 elemento en la posición 'indice'
-  actualizarCarrito();       // actualiza la vista y el total
+  carrito.splice(indice, 1); 
+  actualizarCarrito();       
 }
-// ----- EVENTOS -----
+
 document.getElementById("vaciar-btn").addEventListener("click", vaciarCarrito);
 
-// ----- INICIO -----
+
 mostrarProductos();
 actualizarCarrito();

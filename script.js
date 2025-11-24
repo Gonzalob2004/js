@@ -1,11 +1,11 @@
 // ---------- CONSTANTES Y ESTADO ----------
-const PRODUCTS_URL = "./products.json"; // simula datos remotos
-let productos = [];                      // array de productos cargado por fetch
+const PRODUCTS_URL = "./products.json"; 
+let productos = [];                     
 let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
 let userProfile = JSON.parse(localStorage.getItem("userProfile")) || { nombre: "", email: "", direccion: "" };
 
 // ---------- SELECTORES ----------
-const productosContainer = document.getElementById("productos");
+const productosContainer = document.getElementById("productos-container");
 const carritoLista = document.getElementById("carrito-lista");
 const totalTexto = document.getElementById("total");
 const cartCount = document.getElementById("cart-count");
@@ -46,7 +46,7 @@ function renderProductos() {
     productosContainer.appendChild(card);
   });
 }
-  
+
 // Actualiza el panel del carrito
 function actualizarCarritoUI() {
   carritoLista.innerHTML = "";
@@ -80,7 +80,7 @@ function agregarAlCarrito(id, cantidad = 1) {
 
   const existente = carrito.find(it => it.id === id);
   if (existente) {
-    // comprobar límite por stock
+    
     if (existente.cantidad + cantidad > producto.stock) {
       Swal.fire({ icon: "warning", title: "Límite de stock", text: "No hay suficiente stock disponible." });
       return;
@@ -134,14 +134,14 @@ function vaciarCarrito() {
   });
 }
 
-// ---------- CHECKOUT (simulación de flujo) ----------
+
 async function checkoutFlow() {
   if (carrito.length === 0) {
     Swal.fire({ icon: "info", title: "Carrito vacío", text: "Agrega productos antes de comprar."});
     return;
   }
 
-  // Form HTML (pre-carga desde userProfile)
+  
   const formHtml = `
     <input id="swal-input-nombre" class="swal2-input" placeholder="Nombre" value="${escapeHtml(userProfile.nombre)}">
     <input id="swal-input-email" class="swal2-input" placeholder="Email" value="${escapeHtml(userProfile.email)}">
@@ -165,17 +165,17 @@ async function checkoutFlow() {
     }
   });
 
-  if (!formValues) return; // el usuario canceló
+  if (!formValues) return; 
 
-  // Guardar perfil (precarga futura)
+  
   userProfile = { nombre: formValues.nombre, email: formValues.email, direccion: formValues.direccion };
   saveState();
 
-  // Simular procesamiento de pago
+  
   Swal.fire({ title: 'Procesando pago...', didOpen: () => { Swal.showLoading(); } });
   await new Promise(res => setTimeout(res, 1300)); // espera simulada
 
-  // Actualizar stock (simulación)
+  
   let stockError = false;
   carrito.forEach(it => {
     const prod = getProductById(it.id);
@@ -190,7 +190,7 @@ async function checkoutFlow() {
     prod.stock -= it.cantidad;
   });
 
-  // Generar "orden"
+  
   const orden = {
     id: Date.now(),
     date: new Date().toISOString(),
@@ -199,7 +199,7 @@ async function checkoutFlow() {
     customer: userProfile
   };
 
-  // Limpieza carrito
+  
   carrito = [];
   saveState();
   renderProductos();
@@ -208,12 +208,12 @@ async function checkoutFlow() {
   Swal.fire({ icon: "success", title: "Compra realizada", html: `Orden #${orden.id} - Total: $${formatPeso(orden.total)}` });
 }
 
-// Escape simple para valores en HTML (prevenir comillas rotas)
+
 function escapeHtml(str) {
   return (str || "").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
 }
 
-// ---------- EVENTOS GLOBALES (delegación) ----------
+
 document.addEventListener("click", (e) => {
   const addBtn = e.target.closest(".add-btn");
   if (addBtn) {
@@ -230,7 +230,7 @@ document.addEventListener("click", (e) => {
     return;
   }
 
-  // controles del carrito (delegación)
+
   const act = e.target.closest("[data-action]");
   if (act) {
     const action = act.dataset.action;
@@ -243,20 +243,20 @@ document.addEventListener("click", (e) => {
 
 // botones superiores
 verCarritoBtn.addEventListener("click", () => {
-  // despliega el panel scroll; simple UX: enfocamos en el panel del carrito
+  
   document.getElementById("carrito-panel").scrollIntoView({ behavior: "smooth" });
 });
 vaciarBtn.addEventListener("click", vaciarCarrito);
 checkoutBtn.addEventListener("click", checkoutFlow);
 
-// ---------- CARGA DE DATOS (fetch asincrónico) ----------
+
 async function loadProducts() {
   try {
     const resp = await fetch(PRODUCTS_URL);
     if (!resp.ok) throw new Error("No se pudo cargar products.json");
     productos = await resp.json();
   } catch (err) {
-    // Fallback: datos embebidos si el fetch falla
+    
     productos = [
       { id: 1, nombre: "Remera", precio: 5000, stock: 10 },
       { id: 2, nombre: "Pantalón", precio: 12000, stock: 5 },
@@ -269,5 +269,5 @@ async function loadProducts() {
   }
 }
 
-// ---------- INICIALIZACION ----------
+
 loadProducts();

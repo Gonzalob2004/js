@@ -1,67 +1,132 @@
-body {
-  font-family: Arial, sans-serif;
-  background: #f9f9f9;
-  text-align: center;
-  padding: 20px;
+#carrito-panel {
+  width: 320px;
+  flex-shrink: 0;
+}
+.contenedor-productos {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 30px;
+    padding: 20px;
+    flex: 1;
+}
+.producto-card {
+    width: 220px;
+    height: 320px;
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    text-align: center;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
-#productos-container {
-  display: flex;
-  justify-content: center;
-  gap: 15px;
-  flex-wrap: wrap;
+.producto-card img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 8px;
 }
 
-.producto {
-  background: white;
-  border: 1px solid #ddd;
-  padding: 10px;
-  border-radius: 8px;
-  width: 150px;
+.producto-card button {
+    background: #4CAF50;
+    padding: 10px;
+    border: none;
+    border-radius: 8px;
+    color: white;
+    cursor: pointer;
+    transition: 0.3s;
 }
 
-button {
-  background-color: #4CAF50;
-  color: white;
-  border: none;
-  padding: 8px;
-  margin-top: 5px;
-  cursor: pointer;
-  border-radius: 5px;
+.producto-card button:hover {
+    background: #3e8e41;
 }
-
-button:hover {
-  background-color: #45a049;
+:root{
+  --bg:#f5f7fb;
+  --card:#ffffff;
+  --accent:#2b8fce;
+  --danger:#ff4d4d;
+  --glass: rgba(255,255,255,0.8);
+  --radius:10px;
 }
-ul {
-  list-style: none;   
-  padding: 0;        
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family: Inter, Arial, sans-serif;
+  background:var(--bg);
+  color:#222;
+  display:flex;
+  flex-direction:column;
+  min-height:100vh;
 }
-#carrito-lista li {
-  background: #fff;
-  border: 1px solid #ddd;
-  margin: 5px auto;
-  width: 200px;
-  padding: 5px;
-  border-radius: 5px;
+header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:16px 24px;
+  background:linear-gradient(90deg,var(--glass),transparent);
+  border-bottom:1px solid #e5e7eb;
 }
-.eliminar-btn {
-  background-color: #ff4d4d;
-  border: none;
-  color: white;
-  padding: 4px 6px;
-  border-radius: 4px;
-  cursor: pointer;
-  margin-left: 10px;
-  font-size: 14px;
+h1{margin:0;font-size:1.25rem}
+#cart-summary button{
+  margin-left:8px;
+  padding:8px 12px;border-radius:8px;border:none;cursor:pointer;
 }
-
-.eliminar-btn:hover {
-  background-color: #e60000;
+main{
+  display:flex;
+  gap:20px;
+  padding:20px;
+  flex:1;
 }
-.item-carrito {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 5px;
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(200px,1fr));
+  gap:16px;
+  flex:1;
+}
+.producto{
+  background:var(--card);
+  border-radius:var(--radius);
+  padding:12px;
+  box-shadow:0 2px 8px rgba(0,0,0,0.05);
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+}
+.producto h3{margin:0 0 8px 0;font-size:1rem}
+.producto p{margin:0 0 12px 0;font-weight:600}
+.producto .row{display:flex;justify-content:space-between;align-items:center}
+button{background:var(--accent);color:#fff;padding:8px 10px;border:none;border-radius:8px;cursor:pointer}
+button.secondary{background:#6b7280}
+button.danger{background:var(--danger)}
+.primary{background:#1d4ed8}
+#carrito-panel{
+  width:320px;
+  background:var(--card);
+  border-radius:12px;
+  padding:12px;
+  box-shadow:0 2px 12px rgba(0,0,0,0.06);
+  max-height:70vh;
+  overflow:auto;
+}
+ul{list-style:none;padding:0;margin:0}
+.item-carrito{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:8px;
+  margin:8px 0;
+  padding:8px;
+  border-radius:8px;
+  background:#fafafa;
+}
+.qty-controls{display:flex;gap:8px;align-items:center}
+.small-btn{padding:4px 8px;border-radius:6px;border:none;cursor:pointer}
+.footer-note{padding:10px;text-align:center;color:#6b7280}
+@media(max-width:900px){
+  main{flex-direction:column}
+  #carrito-panel{width:100%}
 }

@@ -1,22 +1,37 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Simulador de Compras</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Simulador Ecommerce - Entrega</title>
+  <link rel="stylesheet" href="style.css" />
+  <!-- SweetAlert2 (reemplaza alert/prompt/confirm) -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
-  <h1>🛒 Simulador de Carrito</h1>
+<header>
+  <h1>Simulador Ecommerce</h1>
+  <div id="cart-summary" class="contenedor-carrito">
+    <button id="ver-carrito-btn">Carrito (<span id="cart-count">0</span>)</button>
+    <button id="vaciar-btn">Vaciar</button>
+  </div>  
+</header>
 
-  <div id="productos-container"></div>
+<main>
+  <section id="productos" class="contenedor-productos"></section>
 
-  <h2>Carrito</h2>
-  <ul id="carrito-lista"></ul>
-  <p id="total">Total: $0</p>
-  <button id="vaciar-btn">Vaciar carrito</button>
+  <aside id="carrito-panel">
+    <h2>Carrito</h2>
+    <ul id="carrito-lista"></ul>
+    <p id="total">Total: $0</p>
+    <button id="checkout-btn" class="primary">Finalizar compra</button>
+  </aside>
+</main>
 
-  <script src="java.js"></script>
+  <footer>
+    <small>Proyecto simulador — HTML + CSS + JS + JSON + localStorage</small>
+  </footer>
+
+  <script src="script.js" type="module"></script>
 </body>
 </html>
-

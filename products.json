@@ -1,0 +1,20 @@
+[
+  {
+    "id": 1,
+    "nombre": "Laptop Lenovo",
+    "precio": 800000,
+    "imagen": "./images/mouse.png"
+  },
+  {
+    "id": 2,
+    "nombre": "Auriculares Sony",
+    "precio": 85000,
+    "imagen": "./images/auriculares.png"
+  },
+  {
+    "id": 3,
+    "nombre": "Mouse Logitech",
+    "precio": 25000,
+    "imagen": "./images/laptop.png"   
+  }
+]

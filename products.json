@@ -3,7 +3,7 @@
     "id": 1,
     "nombre": "Laptop Lenovo",
     "precio": 800000,
-    "imagen": "./images/mouse.png"
+    "imagen": "./images/laptop.png"
   },
   {
     "id": 2,
@@ -15,6 +15,6 @@
     "id": 3,
     "nombre": "Mouse Logitech",
     "precio": 25000,
-    "imagen": "./images/laptop.png"   
+    "imagen": "./images/mouse.png"   
   }
 ]
